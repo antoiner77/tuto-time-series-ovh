@@ -23,7 +23,7 @@ func main() {
 
 	// On va lire la configuration depuis l'environnement
 	// Le nom d'hote de la machine
-	hostname := hostname()
+	hostname := os.Getenv("SENSOR_HOSTNAME")
 	if hostname == "" {
 		log.Fatalln("env var SENSOR_HOSTNAME does not exist")
 	}
