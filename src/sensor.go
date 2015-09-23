@@ -130,7 +130,7 @@ func main() {
 					points2Push = append(points2Push, point)
 				}
 			}
-			break
+			
 		}
 		cStatsPrev = *cStats
 
