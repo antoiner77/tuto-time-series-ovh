@@ -35,7 +35,7 @@ func GetCPUStats() (*map[string]CPUStats, error) {
 	cStats := make(map[string]CPUStats)
 	for scanner.Scan() {
 		line := scanner.Text()
-		if !strings.HasPrefix(line, "cpu") {
+		if !strings.HasPrefix(line, "cpu ") {
 			continue
 		}
 		parts := strings.Fields(line)
