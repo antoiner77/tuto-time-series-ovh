@@ -88,12 +88,6 @@ func main() {
 		ptLoad5Min.Tags["host"] = hostname
 		points2Push = append(points2Push, ptLoad5Min)
 
-		ptLoad15Min := gopentsdb.NewPoint()
-		ptLoad15Min.Metric = "loadavg.15min"
-		ptLoad15Min.Timestamp = load.timestamp
-		ptLoad15Min.Value = load.avg15
-		ptLoad15Min.Tags["host"] = hostname
-		points2Push = append(points2Push, ptLoad15Min)
 
 		// Les stats cpu
 		// cStatsPrev va stocker les stats cpu du test précédent. Ca va nous
@@ -126,29 +120,6 @@ func main() {
 					point.Tags["host"] = hostname
 					points2Push = append(points2Push, point)
 
-					// nice
-					point = gopentsdb.NewPoint()
-					point.Metric = "cpu." + cpu + ".nice.percent"
-					point.Timestamp = now
-					point.Value = float64(diffNice * 100 / diffSum)
-					point.Tags["host"] = hostname
-					points2Push = append(points2Push, point)
-
-					// sys
-					point = gopentsdb.NewPoint()
-					point.Metric = "cpu." + cpu + ".sys.percent"
-					point.Timestamp = now
-					point.Value = float64(diffSys * 100 / diffSum)
-					point.Tags["host"] = hostname
-					points2Push = append(points2Push, point)
-
-					// wait
-					point = gopentsdb.NewPoint()
-					point.Metric = "cpu." + cpu + ".wait.percent"
-					point.Timestamp = now
-					point.Value = float64(diffWait * 100 / diffSum)
-					point.Tags["host"] = hostname
-					points2Push = append(points2Push, point)
 
 					// idle
 					point = gopentsdb.NewPoint()
@@ -182,22 +153,6 @@ func main() {
 			ptMemUsed.Tags["host"] = hostname
 			points2Push = append(points2Push, ptMemUsed)
 
-			// Cached
-			ptMemCached := gopentsdb.NewPoint()
-			ptMemCached.Metric = "mem.cached"
-			ptMemCached.Timestamp = now
-			ptMemCached.Value = float64(memStats["Cached"])
-			ptMemCached.Tags["host"] = hostname
-			points2Push = append(points2Push, ptMemCached)
-
-			// Buffers
-			ptMemBuffers := gopentsdb.NewPoint()
-			ptMemBuffers.Metric = "mem.buffers"
-			ptMemBuffers.Timestamp = now
-			ptMemBuffers.Value = float64(memStats["Buffers"])
-			ptMemBuffers.Tags["host"] = hostname
-			points2Push = append(points2Push, ptMemBuffers)
-
 			// Swap free
 			ptSwapFree := gopentsdb.NewPoint()
 			ptSwapFree.Metric = "mem.swap.free"
@@ -205,14 +160,6 @@ func main() {
 			ptSwapFree.Value = float64(memStats["SwapFree"])
 			ptSwapFree.Tags["host"] = hostname
 			points2Push = append(points2Push, ptSwapFree)
-
-			// Swap used
-			ptSwapused := gopentsdb.NewPoint()
-			ptSwapused.Metric = "mem.swap.used"
-			ptSwapused.Timestamp = now
-			ptSwapused.Value = float64(memStats["SwapTotal"] - memStats["SwapFree"])
-			ptSwapused.Tags["host"] = hostname
-			points2Push = append(points2Push, ptSwapused)
 		}
 
 		// Le reseau
