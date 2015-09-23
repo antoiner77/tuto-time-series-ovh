@@ -122,12 +122,12 @@ func main() {
 
 
 					// idle
-					point = gopentsdb.NewPoint()
-					point.Metric = "cpu." + cpu + ".idle.percent"
-					point.Timestamp = now
-					point.Value = float64(diffIdle * 100 / diffSum)
-					point.Tags["host"] = hostname
-					points2Push = append(points2Push, point)
+					// point = gopentsdb.NewPoint()
+					// point.Metric = "cpu." + cpu + ".idle.percent"
+					// point.Timestamp = now
+					// point.Value = float64(diffIdle * 100 / diffSum)
+					// point.Tags["host"] = hostname
+					// points2Push = append(points2Push, point)
 				}
 			}
 			
@@ -142,7 +142,7 @@ func main() {
 			ptMemFree := gopentsdb.NewPoint()
 			ptMemFree.Metric = "mem.free"
 			ptMemFree.Timestamp = now
-			ptMemFree.Value = float64(memStats["MemFree"])
+			ptMemFree.Value = float64(memStats["MemTotal"])
 			ptMemFree.Tags["host"] = hostname
 			points2Push = append(points2Push, ptMemFree)
 
@@ -155,12 +155,12 @@ func main() {
 			points2Push = append(points2Push, ptMemUsed)
 
 			// Swap free
-			ptSwapFree := gopentsdb.NewPoint()
-			ptSwapFree.Metric = "mem.swap.free"
-			ptSwapFree.Timestamp = now
-			ptSwapFree.Value = float64(memStats["SwapFree"])
-			ptSwapFree.Tags["host"] = hostname
-			points2Push = append(points2Push, ptSwapFree)
+			// ptSwapFree := gopentsdb.NewPoint()
+			// ptSwapFree.Metric = "mem.swap.free"
+			// ptSwapFree.Timestamp = now
+			// ptSwapFree.Value = float64(memStats["SwapFree"])
+			// ptSwapFree.Tags["host"] = hostname
+			// points2Push = append(points2Push, ptSwapFree)
 		}
 
 		// Le reseau
